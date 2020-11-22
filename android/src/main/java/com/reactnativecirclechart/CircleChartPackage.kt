@@ -15,6 +15,6 @@ class CircleChartPackage : ReactPackage {
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return emptyList<ViewManager<*, *>>()
+      return listOf<ViewManager<*, *>>(CircleChart())
     }
 }

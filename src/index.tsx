@@ -1,9 +1,12 @@
-import { NativeModules } from 'react-native';
+import { requireNativeComponent } from 'react-native';
 
-type CircleChartType = {
-  multiply(a: number, b: number): Promise<number>;
+type CircleChartProps = {
+  backgroundColor?: string;
+  foregroundColor?: string;
 };
 
-const { CircleChart } = NativeModules;
+const CircleChart = requireNativeComponent<CircleChartProps>(
+  'CircleChart'
+);
 
-export default CircleChart as CircleChartType;
+export default CircleChart;

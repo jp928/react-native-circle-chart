@@ -3,15 +3,10 @@ import { StyleSheet, View, Text } from 'react-native';
 import CircleChart from 'react-native-circle-chart';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    CircleChart.multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <CircleChart style={{ width: 200, height: 200 }} />
+      <Text>Hello world</Text>
     </View>
   );
 }
