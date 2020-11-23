@@ -115,7 +115,10 @@ const CircleChart: React.FC<CircleChartProps> = ({
           {(param: { progress: number }) => {
             const { progress } = param;
 
-            const factor = progress ? progress / (props.progress || 1) : 0;
+            let factor = progress / (props.progress || 1);
+            if (props.progress === 0) {
+              factor = 0;
+            }
             const labelText = (label * factor).toFixed(2);
 
             return (
