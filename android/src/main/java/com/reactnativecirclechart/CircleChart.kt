@@ -23,8 +23,6 @@ class CircleChart : SimpleViewManager<CircularProgressBar>() {
       progressMax = 100f
       roundBorder = true
       startAngle = 0f
-
-      progressBarColor = Color.BLACK
       // or with gradient
       progressBarColorStart = Color.parseColor("#03bfd7")
       progressBarColorEnd = Color.parseColor("#10395e")
@@ -42,7 +40,7 @@ class CircleChart : SimpleViewManager<CircularProgressBar>() {
 
   @ReactProp(name = "progress", defaultFloat = 0f)
   fun setProgress(view: CircularProgressBar, @Nullable progress: Float) {
-    view.setProgressWithAnimation(progress?: 0f, 400)
+    view.setProgressWithAnimation(progress, 400)
   }
 
   @ReactProp(name = "backgroundProgressBarColorStart")
@@ -55,10 +53,10 @@ class CircleChart : SimpleViewManager<CircularProgressBar>() {
     view.backgroundProgressBarColorEnd = Color.parseColor(backgroundProgressBarColorEnd)
   }
 
-  @ReactProp(name = "barSize")
+  @ReactProp(name = "barSize", defaultFloat = 6f)
   fun setSize(view: CircularProgressBar, @Nullable barSize: Float) {
-    view.progressBarWidth = barSize?:6f
-    view.backgroundProgressBarWidth = barSize?:6f;
+    view.progressBarWidth = barSize
+    view.backgroundProgressBarWidth = barSize;
   }
 
 }
