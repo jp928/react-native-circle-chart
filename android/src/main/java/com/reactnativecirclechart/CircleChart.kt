@@ -1,60 +1,64 @@
 package com.reactnativecirclechart
 
 import android.graphics.Color
+import androidx.annotation.Nullable
+import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.ViewGroupManager
-import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.facebook.react.common.MapBuilder
-import com.facebook.react.uimanager.UIManagerModule
+import com.facebook.react.uimanager.annotations.ReactProp
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
-class CircleChart : ViewGroupManager<ViewGroup>() {
+
+class CircleChart : SimpleViewManager<CircularProgressBar>() {
+  private lateinit var circleProgressBar: CircularProgressBar
+
   override fun getName(): String {
     return "CircleChart"
   }
 
-  override fun createViewInstance(reactContext: ThemedReactContext): ViewGroup {
-    val layout = ConstraintLayout(reactContext)
-    val constraintLayout=
-      reactContext
-        .currentActivity?.layoutInflater?.inflate(R.layout.circle, layout, false)
-        as ConstraintLayout
+  override fun createViewInstance(reactContext: ThemedReactContext): CircularProgressBar {
+    this.circleProgressBar = CircularProgressBar(reactContext, null)
 
-    val circleProgressBar = constraintLayout.getViewById(R.id.circularProgressBar) as CircularProgressBar
+    this.circleProgressBar.apply {
+      progress = 0f
+      progressMax = 100f
+      roundBorder = true
+      startAngle = 0f
 
-    circleProgressBar.apply {
-      progress = 65f
-      // or with animation
-      setProgressWithAnimation(65f, 1000) // =1s
-
-      // Set Progress Max
-      progressMax = 200f
-
-      // Set ProgressBar Color
       progressBarColor = Color.BLACK
       // or with gradient
-      progressBarColorStart = Color.GRAY
-      progressBarColorEnd = Color.RED
+      progressBarColorStart = Color.parseColor("#03bfd7")
+      progressBarColorEnd = Color.parseColor("#10395e")
       progressBarColorDirection = CircularProgressBar.GradientDirection.TOP_TO_BOTTOM
+      progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
 
       // Set background ProgressBar Color
-      backgroundProgressBarColor = Color.GRAY
-      // or with gradient
-      backgroundProgressBarColorStart = Color.WHITE
-      backgroundProgressBarColorEnd = Color.RED
-      backgroundProgressBarColorDirection = CircularProgressBar.GradientDirection.TOP_TO_BOTTOM
+      backgroundProgressBarColor = Color.parseColor("#BEC0C2")
 
-      // Set Width
-      progressBarWidth = 7f // in DP
-      backgroundProgressBarWidth = 3f // in DP
-
-      // Other
-      roundBorder = true
-      startAngle = 180f
-      progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
+      progressBarWidth = 6f // in DP
+      backgroundProgressBarWidth = 6f // in DP
     }
-
-    return layout;
+    return circleProgressBar
   }
+
+  @ReactProp(name = "progress", defaultFloat = 0f)
+  fun setProgress(view: CircularProgressBar, @Nullable progress: Float) {
+    view.setProgressWithAnimation(progress?: 0f, 400)
+  }
+
+  @ReactProp(name = "backgroundProgressBarColorStart")
+  fun setBackgroundProgressBarColorStart(view: CircularProgressBar, @Nullable backgroundProgressBarColorStart: String) {
+    view.backgroundProgressBarColorStart = Color.parseColor(backgroundProgressBarColorStart)
+  }
+
+  @ReactProp(name = "backgroundProgressBarColorEnd")
+  fun setBackgroundProgressBarColorEnd(view: CircularProgressBar, @Nullable backgroundProgressBarColorEnd: String) {
+    view.backgroundProgressBarColorEnd = Color.parseColor(backgroundProgressBarColorEnd)
+  }
+
+  @ReactProp(name = "barSize")
+  fun setSize(view: CircularProgressBar, @Nullable barSize: Float) {
+    view.progressBarWidth = barSize?:6f
+    view.backgroundProgressBarWidth = barSize?:6f;
+  }
+
 }

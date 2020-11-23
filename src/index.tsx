@@ -1,12 +1,1 @@
-import { requireNativeComponent } from 'react-native';
-
-type CircleChartProps = {
-  backgroundColor?: string;
-  foregroundColor?: string;
-};
-
-const CircleChart = requireNativeComponent<CircleChartProps>(
-  'CircleChart'
-);
-
-export default CircleChart;
+export { default as CircleChart } from './CircleChart';
