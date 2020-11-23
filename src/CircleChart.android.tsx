@@ -14,8 +14,8 @@ import {
 } from 'victory-native';
 
 interface CircleChartNativeProps {
-  backgroundProgressBarColorStart?: string;
-  backgroundProgressBarColorEnd?: string;
+  backgroundProgressBarColor?: string;
+  progressBarColorEnd?: string;
   progress?: number;
   barSize?: number;
   style?: ViewStyle;

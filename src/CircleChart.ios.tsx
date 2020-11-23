@@ -12,8 +12,8 @@ import {
 } from 'victory-native';
 
 interface CircleChartNativeProps {
-  backgroundProgressBarColorStart?: string;
-  backgroundProgressBarColorEnd?: string;
+  backgroundProgressBarColor?: string;
+  progressBarColorEnd?: string;
   progress?: number;
   barSize?: number;
   style?: ViewStyle;
@@ -57,19 +57,16 @@ const CircleChart: React.FC<CircleChartProps> = ({
       <VictoryContainer height={size} width={size}>
         <Defs>
           <LinearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-            <Stop
-              offset="0%"
-              stopColor={props.backgroundProgressBarColorStart || '#03bfd7'}
-            />
+            <Stop offset="0%" stopColor={'#03bfd7'} />
             <Stop
               offset="100%"
-              stopColor={props.backgroundProgressBarColorEnd || '#10395e'}
+              stopColor={props.progressBarColorEnd || '#10395e'}
             />
           </LinearGradient>
         </Defs>
         <Circle
           r={RADIUS - 3.4}
-          stroke="#BEC0C2"
+          stroke={props.backgroundProgressBarColor || '#BEC0C2'}
           cx={RADIUS}
           cy={RADIUS}
           strokeWidth={7}
