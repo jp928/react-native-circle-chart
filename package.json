@@ -1,6 +1,6 @@
 {
   "name": "react-native-circle-chart",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React Native circle progress chart",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
